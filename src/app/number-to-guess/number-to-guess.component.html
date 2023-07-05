@@ -1,0 +1,44 @@
+<section class="container">
+  <form [formGroup]="guessNumberInput" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="numberInput"></label>
+      <input type="text" id="numberInput" name="guessNumber" formControlName="guessNumber" required>
+        <div *ngIf="showMessage">
+
+          <div *ngIf="!isInputNumber(guessNumber.value)">
+            <p>📛 No Number</p>
+          </div>
+          <div *ngIf="!isInputInRange(guessNumber.value)">
+            <p>Number must be between 1 and 20</p>
+          </div>
+        </div>
+      <!-- <input (keyup)="onKey($event)" type="text" id="numberInput" name="guessNumber" formControlName="guessNumber"> -->
+    </div>
+
+    <!-- <p>NUM / {{numberGuess}}</p> -->
+    <button class="btn btn-primary" [class.toHide]="isHidden"  type="submit" > Check !</button>
+    <!-- <button class="btn btn-primary" type="submit" (click)="onClickMe()">Check !</button> -->
+    <p>ERROR / </p>
+    <!-- <p>{{ compareNumbers(numberGuess, secretNumber) }}</p> -->
+
+    <p>  secret number : {{secretNumber}} </p>
+
+    <p class="message"> Messages : </p>
+
+    <div *ngIf= "showMessage && guessNumber.valid">
+
+      <div *ngIf="guessNumber.value == secretNumber">
+        <p> Win </p>
+      </div>
+      <div *ngIf="guessNumber.value < secretNumber">
+        <p> too low </p>
+      </div>
+      <div *ngIf="guessNumber.value > secretNumber">
+        <p> too hight </p>
+      </div>
+    </div>
+
+  </form>
+</section>
+
+
